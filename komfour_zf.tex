@@ -15,12 +15,20 @@
 \usepackage{polyglossia}
 \setdefaultlanguage[variant=swiss]{german}
 
+%% Math
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+%% Layout
+\usepackage{multicol}
+\usepackage{enumitem}
+
 %% License configuration
 \usepackage[
-    type={CC},
-    modifier={by-nc-sa},
-    version={4.0},
-    lang={german},
+  type={CC},
+  modifier={by-nc-sa},
+  version={4.0},
+  lang={german},
 ]{doclicense}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,10 +39,36 @@
 \semester{Fr\"uhlingssemester 2020}
 
 \authoremail{npross@hsr.ch}
-\author{\textsl{Naoki Pross} -- \texttt{\theauthoremail}}
+\author{Naoki Pross -- \texttt{\theauthoremail}}
 
 \title{\texttt{\themodule} Zusammenfassung}
 \date{\thesemester}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros and settings
+
+%% Equal by definition
+\newcommand\defeq{\overset{\mathrm{def.}}{=}}
+
+%% number sets
+\newcommand\Rset{\mathbb{R}}
+\newcommand\Cset{\mathbb{C}}
+
+%% Complex operators
+\DeclareMathOperator\cjs{cjs}
+\newcommand\cjsl[1]{\cos #1 + j\sin #1}
+
+\newcommand\ej[1]{e^{j#1}}
+\newcommand\conj[1]{\overline{j #1}}
+
+\renewcommand\Re{Re}
+\renewcommand\Im{Im}
+
+%% Theorems
+\newtheorem{theorem}{Satz}
+\setlist[description]{%
+  align=right, labelwidth=2cm, leftmargin=!, %
+  format={\normalfont\slshape}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document
@@ -45,9 +79,37 @@
 \tableofcontents
 
 \section{Komplexe Zahlen}
+\begin{theorem}[Komplexe Einheit]
+\(
+  j \defeq +\sqrt{-1} \iff j^2 = -1
+\)
+\end{theorem}
+\begin{theorem}[Multiplikation] \(a, b \in \Cset\) \(\arg a = \phi, \arg b = \theta\)
+\begin{description}
+  \item[Kartesich] \(a \odot b = (a_1 b_1 - a_2 b_2) + j (a_1 b_2 + a_2 b_1)\)
+  \item[Polar] \(a\odot b &= |a|\cdot|b|\exp{j(\phi + \theta)}\)
+\end{description} 
+\end{theorem}
+\begin{theorem}[Division] \(a, b \in \Cset\) \(\arg a = \phi, \arg b = \theta\)
+\begin{description}
+  \item[Kartesich]
+  \item[Polar] \(a / b &= |a|/|b|\exp{j(\phi - \theta)}\)
+\end{description} 
+\end{theorem}
+
+
+\subsection{Algebra}
+Seien \(a, b \in \Cset\) und \(a = a_1 + ja_2, a_1,a_2 \in \Rset\) und \"ahnlich f\"ur \(b\)
+\begin{align*}
+  a \oplus b &=  (a_1 + b_1) + j (a_2 + b_2) \\
+\end{align*}
+
+\subsection{Neue Operationen}
+\subsection{Graphische Darstellung}
+\subsubsection{Ebene Geometrie}
 
 \section{Lizenz}
 \doclicenseThis
 
-
 \end{document}
+% vim: set et ts=2 sw=2 spelllang=de spell wrap linebreak :
