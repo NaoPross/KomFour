@@ -20,8 +20,8 @@
 \usepackage{amsthm}
 
 %% Layout
-\usepackage{multicol}
 \usepackage{enumitem}
+
 
 %% License configuration
 \usepackage[
@@ -51,6 +51,7 @@
 \newcommand\defeq{\overset{\mathrm{def.}}{=}}
 
 %% number sets
+\newcommand\Nset{\mathbb{N}}
 \newcommand\Rset{\mathbb{R}}
 \newcommand\Cset{\mathbb{C}}
 
@@ -59,16 +60,33 @@
 \newcommand\cjsl[1]{\cos #1 + j\sin #1}
 
 \newcommand\ej[1]{e^{j#1}}
-\newcommand\conj[1]{\overline{j #1}}
 
-\renewcommand\Re{Re}
-\renewcommand\Im{Im}
+\newcommand\conj[1]{\overline{#1}}
+\newcommand\len[1]{\lvert#1\rvert}
+
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\Im{\operatorname{Im}}
 
 %% Theorems
+\newtheoremstyle{komfourzf} % name of the style to be used
+  {\topsep}
+  {\topsep}
+  {}
+  {0pt}
+  {\bfseries}
+  {.}
+  { }
+  { }
+
+\theoremstyle{komfourzf}
 \newtheorem{theorem}{Satz}
+
 \setlist[description]{%
   align=right, labelwidth=2cm, leftmargin=!, %
   format={\normalfont\slshape}}
+
+\setlist[itemize]{%
+  align=right, labelwidth=5mm, leftmargin=!}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document
@@ -79,37 +97,100 @@
 \tableofcontents
 
 \section{Komplexe Zahlen}
+
 \begin{theorem}[Komplexe Einheit]
 \(
   j \defeq +\sqrt{-1} \iff j^2 = -1
 \)
 \end{theorem}
-\begin{theorem}[Multiplikation] \(a, b \in \Cset\) \(\arg a = \phi, \arg b = \theta\)
-\begin{description}
-  \item[Kartesich] \(a \odot b = (a_1 b_1 - a_2 b_2) + j (a_1 b_2 + a_2 b_1)\)
-  \item[Polar] \(a\odot b &= |a|\cdot|b|\exp{j(\phi + \theta)}\)
-\end{description} 
-\end{theorem}
-\begin{theorem}[Division] \(a, b \in \Cset\) \(\arg a = \phi, \arg b = \theta\)
-\begin{description}
-  \item[Kartesich]
-  \item[Polar] \(a / b &= |a|/|b|\exp{j(\phi - \theta)}\)
-\end{description} 
+
+\begin{theorem}[Summe] Seien \(a, b \in \Cset\),
+  \(a = a_1 + ja_2, a_1,a_2 \in \Rset\) und \"ahnlich f\"ur \(b\)
+\[
+  a \oplus b =  (a_1 + b_1) + j (a_2 + b_2)
+\]
 \end{theorem}
 
+\begin{theorem}[Multiplikation] Seien \(a, b \in \Cset\)
+  \(\arg a = \phi, \arg b = \theta\)
+  \begin{description}
+    \item[Kartesich] \(a \odot b = (a_1 b_1 - a_2 b_2) + j (a_1 b_2 + a_2 b_1)\)
+    \item[Polar] \(a\odot b = |a|\cdot|b|\exp{j(\phi + \theta)}\)
+  \end{description} 
+\end{theorem}
 
-\subsection{Algebra}
-Seien \(a, b \in \Cset\) und \(a = a_1 + ja_2, a_1,a_2 \in \Rset\) und \"ahnlich f\"ur \(b\)
-\begin{align*}
-  a \oplus b &=  (a_1 + b_1) + j (a_2 + b_2) \\
-\end{align*}
+\begin{theorem}[Division] Seien \(a, b \in \Cset\)
+  mit \(\arg a = \phi, \arg b = \theta\),
+  dann \(a / b = |a|/|b|\exp{j(\phi - \theta)}\)
+\end{theorem}
 
-\subsection{Neue Operationen}
-\subsection{Graphische Darstellung}
-\subsubsection{Ebene Geometrie}
+\begin{theorem}[Potenzen]~
+  \begin{itemize}
+    \item F\"ur \(n \in \Nset\) gilt
+      \(\cjs(x)^n = \cjs(nx) \iff \left(\ej{x}\right)^n = \ej{nx}\)
+    \item 
+  \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Wurzeln] Sei \(\Cset \ni z = r\ej{\phi}\).
+  \(z\) hat genau \(n\) verschiedene \(n\)-te Wurzeln
+  (\(n \in \Nset\))
+  \[
+    w_{k+1} = \sqrt[n]{r}\exp \frac{j(\phi + 2k\pi)}{n}
+      \qquad k = 0,1,\ldots,n-1
+  \]
+  Beachtung! Allgemein \(a,b \in \Cset: \sqrt[n]{ab} \neq \sqrt[n]{a}\sqrt[n]{b}\)
+\end{theorem}
+
+\begin{theorem}[Polynome in \(\Cset\)]~ %
+  \begin{itemize}
+    \item Jedes komplexe Polynom vom Grad \(\geq 1\) hat mindestens eine Nullstelle.
+
+    \item Ein komplexes Polynom \(p(z) = a_n z^n + \cdots + a_1 z + a_0\) vom 
+      Grad \(n\) zerf\"allt in \(\Cset\) in lauter lineare Faktoren, wobei \(z_k 
+      \in \Cset\) als Nullstellen von \(p(z)\) nicht unbedingt verschieden sein 
+      m\"ussen.
+
+    \item Ein komplexes Polynom \(p(z)\) vom Grad \(n\) hat in \(\Cset\) genau 
+      \(n\) (verschiedene) Nullstellen, wenn diese mit ihrer Vielfachheit 
+      gez\"ahlt werden.
+  \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Polynome mit reellen Koeffizienten]~ %
+  \begin{itemize}
+    \item F\"ur Polynome mit reellen Koeffizienten \(p(z)\) treten nicht-reelle 
+      Nullstellen nur als \emph{konjugiert-komplexe} Paare \(w, \conj{w}\).
+      In der komplexen Linearfaktor-Zerlegung von \(p(z)\) k\"onnen dan wei 
+      Faktoren \((z-z_0)\) und \((z-\conj{z_0})\) jeweils zu einem 
+      quadratischen Faktor \[
+        z^2 - 2 \Re(z_0) z + \len{z}^2
+      \] mit \emph{reellen} Koeffizienten zusammengefasst werden.
+
+    \item Ein Polynom mit reellen Koeffizienten von \emph{ungeraden} Grad hat
+      mindestens eine \emph{reelle} Nullstelle.
+
+    \item Alle Nullstellen des Polynoms \(p(z) = a_n z^n + \cdot + a_1 z + a_0\)
+      liegen in der Gauss'schen Zahlenebene in einer Kreisscheibe um der 
+      Ursprung mit Radius \[
+        R = \sum_{k=0}^n \left\lvert\frac{a_k}{a_n}\right\rvert
+      \]
+
+    %% TODO: kubische Gleichung
+
+    \item F\"ur allgemeine Gleichungen vom Grad 5 und gr\"osser existieren 
+      prinzipiell \emph{keine} nur aus den 4 Grundoperationen und Wurzeln
+      zusammengesetzten L\"osungsformeln.
+  \end{itemize}
+\end{theorem}
+
+\section{Komplexwertige Funktionen}
+\section{Fourierreihen}
+\section{Spektren}
+\section{Diskrete Fouriertransformation}
 
 \section{Lizenz}
 \doclicenseThis
 
 \end{document}
-% vim: set et ts=2 sw=2 spelllang=de spell wrap linebreak :
+% vim: set et ts=2 sw=2 spelllang=de spell linebreak :
