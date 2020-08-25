@@ -3,7 +3,7 @@
 % !TeX root = komfour_zf.tex
 
 %% TODO: publish to CTAN
-\documentclass[twocolumn, small]{tex/hsrzf}
+\documentclass[twocolumn, margin=normal]{tex/hsrzf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
@@ -34,14 +34,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metadata
 
-\course{Elektrotechnik}
+\course{Electrical Engineering}
 \module{KomFour}
-\semester{Fr\"uhlingssemester 2020}
+\semester{Spring Semester 2020}
 
 \authoremail{npross@hsr.ch}
 \author{Naoki Pross -- \texttt{\theauthoremail}}
 
-\title{\texttt{\themodule} Zusammenfassung}
+\title{Cheat sheets for \texttt{\themodule}}
 \date{\thesemester}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,6 +52,8 @@
 
 %% number sets
 \newcommand\Nset{\mathbb{N}}
+\newcommand\Zset{\mathbb{Z}}
+\newcommand\Qset{\mathbb{Q}}
 \newcommand\Rset{\mathbb{R}}
 \newcommand\Cset{\mathbb{C}}
 
@@ -148,11 +150,11 @@
 \end{definition}
 
 \begin{definition}[Absolute value]
-  If \(z = a + jb\) we define the \emph{abolute value} \(\len{z} = \sqrt{a^2 + b^2}\)
+  If \(z = a + jb\) we define the \emph{absolute value} \(\len{z} = \sqrt{a^2 + b^2}\)
 \end{definition}
 
 \begin{lemma}[Properties of absolute value]
-  Let \(z,w\in\Cset\). We have \(\len{z} \in\Rset^+_0\), \(z\conj{z} = \len{z}^2\) and as a consequence \(\len{zw} = \len{z}\cdot\len{w}\) and \(\len{\conj{z}} = \len{z}\). In additon we have the inequalities
+  Let \(z,w\in\Cset\). We have \(\len{z} \in\Rset^+_0\), \(z\conj{z} = \len{z}^2\) and as a consequence \(\len{zw} = \len{z}\cdot\len{w}\) and \(\len{\conj{z}} = \len{z}\). In addition we have the inequalities
   \begin{align*}
     -\len{z} \leq &\Re(z) \leq \len{z} &
     \len{z} &\leq \len{\Re(z)} + \len{\Im(z)} \\
@@ -182,7 +184,7 @@
 \end{lemma}
 
 \begin{definition}[Polar notation]
-  An alternative rapresentation of a complex number \(z = a + jb\) is its \emph{polar form} \(z = r \angle \phi\), where \(r = \len{z}\) and \(\phi = \arg{z} = r(\cos\phi + j\sin\phi)\).
+  An alternative representation of a complex number \(z = a + jb\) is its \emph{polar form} \(z = r \angle \phi\), where \(r = \len{z}\) and \(\phi = \arg{z} = r(\cos\phi + j\sin\phi)\).
   \begin{align*}
     a &= r\cos\phi &
     b &= r \sin\phi &
@@ -217,6 +219,11 @@
     \len{z/w} = \len{z}/\len{w} \quad
     \arg(z/w) = \arg z - \arg w
   \]
+  Lastly from the product we see that for \(k \in \Nset\)
+  \[
+    \len{z^k} = \len{z}^k \quad
+    \arg{z^k} = k \arg{z}
+  \]
 \end{lemma}
 
 \begin{theorem}[De Moivre's formula]
@@ -225,16 +232,139 @@
     \left(\cos\phi + j\sin\phi\right)^n = \cos(n\phi) + j\sin(n\phi)
   \]
   As a consequence with the binomial formula
-  \((a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^n\) we have
-  \[
-    \sin(n\phi) = 
-  \]
+  \((a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^n\), recalling that \(\binom{n}{k} = n!/(k!(n-k)!)\) (Pascal's triangle), we have
+  \begin{align*}
+    \sin(nx)&=\sum _{k=0}^{n}{\binom {n}{k}}(\cos x)^{k}\,(\sin x)^{n-k}\,\sin {\frac {(n-k)\pi }{2}}\\
+    \cos(nx)&=\sum _{k=0}^{n}{\binom {n}{k}}(\cos x)^{k}\,(\sin x)^{n-k}\,\cos {\frac {(n-k)\pi }{2}}
+  \end{align*}
 \end{theorem}
 
 \section{Complex valued functions}
+
+\begin{definition}[Function in \(\Cset\)]
+  Let \(f: \mathbb{D} \to \mathbb{W}\) with both \(\mathbb{D}, \mathbb{W} \subseteq \Cset\) 
+  that maps \(z = (a + jb) \mapsto w = (u + jv)\),
+  then \(u = \Re f(z)\) and \(v = \Im f(z)\).
+  If \(f\) is a bijection with inverse \(f^{-1}\), then \(a = \Re f^{-1}(w), b = \Im f^{-1}(w)\).
+\end{definition}
+
+\begin{definition}[Differentiation in \(\Cset\)]
+  Let \(f\) be a function of \(z\) and \(h \in \Cset\). We have the limit
+  \[
+    \lim_{\len{h} \to 0} \frac{f(z_0 + h) - f(z_0)}{h} = f'(z_0)
+  \]
+  to define the \emph{derivative} of \(f\) at the point \(z_0\).
+\end{definition}
+
+\begin{lemma}[Local dilation and rotation]
+  Let \(f\) be a differentiable function in \(\Cset\).
+  If \(f'(z) \neq 0\) everywhere, then \(f\) is a conformal map (i.e. preserves angles) with local dilation of \(\len{f'(z)}\) and rotation of \(\arg f'(z)\)
+\end{lemma}
+
+\begin{definition}[Linear function]
+
+\end{definition}
+
+\begin{definition}[Monomial and \(n\)-th root]
+  Let \(w = z^n\) be a monomial of degree \(n\in\Nset\). Using the polar notation we see that
+  \((r\angle \phi)^n = r^n \angle (n\phi)\). Because \(r\angle\phi = r\angle(\phi+2\pi)\) there cannot be a bijection between \(w\) and \(z\), if we want to define an inverse function \(z = \sqrt[n]{w}\) we get many values with the form
+  \[
+    z_k = \sqrt[n]{r}\angle(\phi + k2\pi)/n \qquad 0 \leq k < n
+  \]
+  This fact implies that in general for \(z,u \in\Cset\) \(\sqrt[n]{zu} \neq \sqrt[n]{z}\sqrt[n]{u}\), as the relationship holds only for \emph{some} values of \(\sqrt[n]{z} \text{ and } \sqrt[n]{u}\).
+\end{definition}
+
+\begin{theorem}[Roots of a polynomial]
+  Every complex polynomial of degree \(n\) has always \(n\) roots in \(\Cset\).
+\end{theorem}
+
+\begin{theorem}
+  Every complex polynomial of degree \(n\) with coefficients can be \emph{uniquely} rewritten in term of its roots.
+  \[
+    P(z) = \sum_{k=0}^n a_k z^k = a_n \prod_{k=0}^{n} (z - z_k)
+  \]
+\end{theorem}
+
+\begin{theorem}[Polynomal with real coefficients]
+  The roots of a polynomial with real coefficients of degree \(n\), always come in conjugate complex pairs of \(r\) and \(\conj{r}\). That is because
+  \[
+    (z - r)(z - \conj{r}) = z^2 - 2\Re(r)z + \len{z}^2
+  \]
+\end{theorem}
+
+\begin{lemma}
+  From the previous theorem follows that a polynomial of \emph{odd} degree, has always at least one real solution because \(r \in\Rset \iff r = \conj{r}\).
+\end{lemma}
+
+\begin{theorem}
+  All roots of a polynomial \(p(z) = \sum_{k=0}^n a_k z^k\) are inside of the open disk centered at the origin of radius \(\sum_{k=0}^n \len{a_k / a_n}\).
+\end{theorem}
+
+\begin{theorem}[Cardano's cubic formula]
+  % TODO
+\end{theorem}
+
+\begin{definition}[Exponential]
+  If \(z\) is a complex number we define the exponential function \(e^z\) by its convergent power series
+  \[
+    e^z = \sum_{n=0}^\infty \frac{z^n}{n!}
+  \]
+\end{definition}
+
+\begin{theorem}[Euler's formula]
+  By setting the argument of the exponential function to \(jt\) for some \(t \in\Rset\) we can reorder the power series to be a sum of the power series of \(j\sin\) and \(\cos\), and thus define
+  \[
+    e^{jt} = \cos t + j\sin t = \cjs t = 1\angle t
+  \]
+\end{theorem}
+
+\begin{lemma} Let \(a,b \in\Cset\) and \(k\in\Zset\)
+  \[
+    e^a e^b = e^{a+b} \quad
+    e^a / e^b = e^{a-b} \quad
+    \left(e^a \right)^k = e^{ak}
+  \]
+\end{lemma}
+
+\begin{definition}[Trigonometric functions]
+\end{definition}
+
+\begin{definition}[Logarithm]
+  Because \(w = e^z\) defined from \(\Cset \to \Cset\) is not a bijection (\(e^{z + 2\pi j} = e^z\)), unless we restrict the imaginary part of the domain to \((\pi, \pi]\), we get only an equivalence relationship because
+  \[
+    \ln\left[\len{w} e^{j(\phi + k2\pi)}\right] = \ln\len{w} + j(\phi + k2\pi)
+  \]
+  where \(k \in\Zset\). Similarly for \(z,w\in\Cset\)
+  \begin{align*}
+    \ln(w) &\equiv z &\pmod{2\pi j} \\
+    \ln(w^k) &\equiv k\ln(w) &\pmod{2\pi j} \\
+    \ln(zw) &\equiv \ln(z) + \ln(w) &\pmod{2\pi j} \\
+    \ln(z/w) &\equiv \ln(z) - \ln(w) &\pmod{2\pi j}
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[General exponentiation]
+  So far we have only exponentiation for an exponent \(k\in\Zset\), by adding \(m \in\Nset\) we can define the quotient \(k/m \in\Qset\) that together with \(z\in\Cset\) gives
+  \begin{align*}
+    z^{k/m} &= e^{\ln(z) k/m} \\
+    &= \exp\big((\ln\len{z} + j(\arg z + 2\pi n)) k/m\big) \\
+    &= \exp\big(\ln\len{z}\cdot k/m)\exp((\arg z + 2\pi n)jk/m\big) \\
+    &= \len{z}^{k/m}\exp\big((\arg z + 2\pi n)jk/m\big)= \sqrt[m]{z^k}
+  \end{align*}
+  like in the reals, except that we have \(m\) values instead of 1 or 2. If we let \(w \in\Cset\) the expression \(z^w\) cannot be equal to an unique value because
+  \begin{align*}
+    z^w = e^{w \ln z} &= \exp\big( w (\ln\len{z} + j \arg{z} + 2\pi nj)\big) \\
+    &= e^{w(\ln\len{z} + j\arg z)} e^{w2\pi nj}
+  \end{align*}
+  instead it is said to be \emph{multivalued}.
+\end{lemma}
+
+\section{Fourier Series}
+
+\section{Fourier Transform}
 
 \section{License}
 \doclicenseThis
 
 \end{document}
-% vim: set et ts=2 sw=2 spelllang=us spell linebreak :
+% vim: set et ts=2 sw=2 spelllang=en spell linebreak :
