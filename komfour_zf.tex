@@ -3,7 +3,7 @@
 % !TeX root = komfour_zf.tex
 
 %% TODO: publish to CTAN
-\documentclass[]{tex/hsrzf}
+\documentclass[twocolumn, small]{tex/hsrzf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
@@ -13,7 +13,7 @@
 
 %% Language configuration
 \usepackage{polyglossia}
-\setdefaultlanguage[variant=swiss]{german}
+\setdefaultlanguage[variant=uk]{english}
 
 %% Math
 \usepackage{amsmath}
@@ -28,7 +28,7 @@
   type={CC},
   modifier={by-nc-sa},
   version={4.0},
-  lang={german},
+  lang={english},
 ]{doclicense}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,11 +79,13 @@
   { }
 
 \theoremstyle{komfourzf}
-\newtheorem{theorem}{Satz}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
 
 \setlist[description]{%
   align=right, labelwidth=2cm, leftmargin=!, %
-  format={\normalfont\slshape}}
+  format={\normalfont\itshape}}
 
 \setlist[itemize]{%
   align=right, labelwidth=5mm, leftmargin=!}
@@ -93,104 +95,146 @@
 
 \begin{document}
 
-\maketitle
-\tableofcontents
+\section{Complex Numbers}
 
-\section{Komplexe Zahlen}
-
-\begin{theorem}[Komplexe Einheit]
-\(
-  j \defeq +\sqrt{-1} \iff j^2 = -1
-\)
-\end{theorem}
-
-\begin{theorem}[Summe] Seien \(a, b \in \Cset\),
-  \(a = a_1 + ja_2, a_1,a_2 \in \Rset\) und \"ahnlich f\"ur \(b\)
-\[
-  a \oplus b =  (a_1 + b_1) + j (a_2 + b_2)
-\]
-\end{theorem}
-
-\begin{theorem}[Multiplikation] Seien \(a, b \in \Cset\)
-  \(\arg a = \phi, \arg b = \theta\)
-  \begin{description}
-    \item[Kartesich] \(a \odot b = (a_1 b_1 - a_2 b_2) + j (a_1 b_2 + a_2 b_1)\)
-    \item[Polar] \(a\odot b = |a|\cdot|b|\exp{j(\phi + \theta)}\)
-  \end{description} 
-\end{theorem}
-
-\begin{theorem}[Division] Seien \(a, b \in \Cset\)
-  mit \(\arg a = \phi, \arg b = \theta\),
-  dann \(a / b = |a|/|b|\exp{j(\phi - \theta)}\)
-\end{theorem}
-
-\begin{theorem}[Potenzen]~
-  \begin{itemize}
-    \item F\"ur \(n \in \Nset\) gilt
-      \(\cjs(x)^n = \cjs(nx) \iff \left(\ej{x}\right)^n = \ej{nx}\)
-    \item 
-  \end{itemize}
-\end{theorem}
-
-\begin{theorem}[Wurzeln] Sei \(\Cset \ni z = r\ej{\phi}\).
-  \(z\) hat genau \(n\) verschiedene \(n\)-te Wurzeln
-  (\(n \in \Nset\))
+\begin{definition}[Complex Unit and Zero]
   \[
-    w_{k+1} = \sqrt[n]{r}\exp \frac{j(\phi + 2k\pi)}{n}
-      \qquad k = 0,1,\ldots,n-1
+    j \defeq +\sqrt{-1} \iff j^2 = -1
   \]
-  Beachtung! Allgemein \(a,b \in \Cset: \sqrt[n]{ab} \neq \sqrt[n]{a}\sqrt[n]{b}\)
+  \[
+    1 = (1,0) \quad 0 = (0,0) \quad j = (0,1)
+  \]
+\end{definition}
+
+\begin{definition}[Negation and Sum] Let \(z, w \in \Cset\)
+\[
+  -z = (-z_1, -z_2) \quad
+  z \oplus w =  (z_1 + w_1, z_2 + w_2)
+\]
+\end{definition}
+
+\begin{lemma}
+  The complex numbers form an additive group. Let \(z, w, v \in \Cset\), we have
+  \begin{description}[leftmargin=3cm]
+    \item[Identity] \(z + 0 = z\)
+    \item[Commutativity] \(z + w = w + z\)
+    \item[Associativity] \(z + (w + v) = (z + w) + v\)
+    \item[Inverse property] \(z + (-z) = (-z) + z = 0\)
+  \end{description}
+\end{lemma}
+
+\begin{definition}[Multiplication] Let \(z, w \in \Cset\)
+  \[
+    (a,b) \odot (c,d) = (ac - bd, ad + bc)
+  \]
+\end{definition}
+
+\begin{lemma} The complex numbers form a commutative ring. Let \(z,w,v \in\Cset\)
+  \begin{description}[leftmargin=3cm]
+    \item[Identity] \(1\cdot z = z\)
+    \item[Commutativity] \(z \cdot w = w \cdot z\)
+    \item[Associativity] \(z (w v) = (z w) v\)
+    \item[Distributivity] \(z (w + v) = zw + zv\)
+  \end{description}
+\end{lemma}
+
+\begin{definition}[Real and imaginary part and conjugation]
+  Let \(z = a + jb\). The \emph{real} part of \(z\) is \(\Re(z) = a\), similarly the \emph{imaginary} part is \(\Im(z) = b\). We can thus define the \emph{complex conjugate} \(\conj{z}\).
+  \[
+    z = \Re(z) + j\Im(z)
+    \quad
+    \conj{z} = \Re(z) - j\Im(z)
+  \]
+\end{definition}
+
+\begin{definition}[Absolute value]
+  If \(z = a + jb\) we define the \emph{abolute value} \(\len{z} = \sqrt{a^2 + b^2}\)
+\end{definition}
+
+\begin{lemma}[Properties of absolute value]
+  Let \(z,w\in\Cset\). We have \(\len{z} \in\Rset^+_0\), \(z\conj{z} = \len{z}^2\) and as a consequence \(\len{zw} = \len{z}\cdot\len{w}\) and \(\len{\conj{z}} = \len{z}\). In additon we have the inequalities
+  \begin{align*}
+    -\len{z} \leq &\Re(z) \leq \len{z} &
+    \len{z} &\leq \len{\Re(z)} + \len{\Im(z)} \\
+    -\len{z} \leq &\Im(z) \leq \len{z} &
+    \len{z + w} &\leq \len{z} + \len{w}
+  \end{align*}
+  The last one is the \emph{triangle inequality}.
+\end{lemma}
+
+\begin{definition}[Reciprocal and quotients]
+  If \(z\) is a non-zero complex number we define the \emph{reciprocal} \(z^{-1}\) of \(z\) to be \(z^{-1} = \len{z}^{-2}\conj{z}\). If \(z = 0\) the reciprocal \(0^{-1}\) is left undefined.
+  It is now possible to define \(z/w = zw^{-1}\) with \(z,w \in\Cset\) and \(w \neq 0\).
+\end{definition}
+
+\begin{lemma}[More properties of conjugation]
+  Let \(z,w \in\Cset\).
+  \(\conj{z} = z\) iff \(z \in \Rset\) and \(\conj{z} = \conj{w}\) iff \(z = w\).
+  Furthermore:
+  \begin{align*}
+    \conj{\conj{z}} &= z &
+    \conj{z \pm  w} &= \conj{z} \pm \conj{w} &
+    \Re(z) &= (z + \conj{z})/2 \\
+    \conj{z\cdot w} &= \conj{z}\cdot\conj{w} &
+    \conj{z/w} &= \conj{z}/\conj{w} &
+    \Im(z) &= (z - \conj{z})/2j
+  \end{align*}
+\end{lemma}
+
+\begin{definition}[Polar notation]
+  An alternative rapresentation of a complex number \(z = a + jb\) is its \emph{polar form} \(z = r \angle \phi\), where \(r = \len{z}\) and \(\phi = \arg{z} = r(\cos\phi + j\sin\phi)\).
+  \begin{align*}
+    a &= r\cos\phi &
+    b &= r \sin\phi &
+    r &= \sqrt{z\conj{z}}
+  \end{align*}
+  For \(a = 0\) we define \(\phi = \lim_{a\to 0} \arctan(b/a)\) and otherwise
+  \begin{align*}
+    \phi = \arg(z)
+    &= \begin{cases}
+      \arctan(b/a) & a > 0 \\
+      \arctan(b/a) + \pi & a < 0
+    \end{cases} \\
+    &= \begin{cases}
+      \arccos(a/r) & b \geq 0 \\
+      -\arccos(b/r) & b < 0 \\
+    \end{cases}
+  \end{align*}
+  Another variant of this notation is
+  \[
+    z = r\cjs\phi = r(\cos\phi + j\sin\phi)
+  \]
+\end{definition}
+
+\begin{lemma}[Arithmetic in polar notation]
+  Let \(z,w\in\Cset\) then the product \(zw\) has
+  \[
+    \len{zw} = \len{z}\cdot\len{w} \quad
+    \arg(zw) = \arg z + \arg w
+  \]
+  Similarly the quotient \(z/w\) follows
+  \[
+    \len{z/w} = \len{z}/\len{w} \quad
+    \arg(z/w) = \arg z - \arg w
+  \]
+\end{lemma}
+
+\begin{theorem}[De Moivre's formula]
+  Let \(n \in\Nset\)
+  \[
+    \left(\cos\phi + j\sin\phi\right)^n = \cos(n\phi) + j\sin(n\phi)
+  \]
+  As a consequence with the binomial formula
+  \((a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^n\) we have
+  \[
+    \sin(n\phi) = 
+  \]
 \end{theorem}
 
-\begin{theorem}[Polynome in \(\Cset\)]~ %
-  \begin{itemize}
-    \item Jedes komplexe Polynom vom Grad \(\geq 1\) hat mindestens eine Nullstelle.
+\section{Complex valued functions}
 
-    \item Ein komplexes Polynom \(p(z) = a_n z^n + \cdots + a_1 z + a_0\) vom 
-      Grad \(n\) zerf\"allt in \(\Cset\) in lauter lineare Faktoren, wobei \(z_k 
-      \in \Cset\) als Nullstellen von \(p(z)\) nicht unbedingt verschieden sein 
-      m\"ussen.
-
-    \item Ein komplexes Polynom \(p(z)\) vom Grad \(n\) hat in \(\Cset\) genau 
-      \(n\) (verschiedene) Nullstellen, wenn diese mit ihrer Vielfachheit 
-      gez\"ahlt werden.
-  \end{itemize}
-\end{theorem}
-
-\begin{theorem}[Polynome mit reellen Koeffizienten]~ %
-  \begin{itemize}
-    \item F\"ur Polynome mit reellen Koeffizienten \(p(z)\) treten nicht-reelle 
-      Nullstellen nur als \emph{konjugiert-komplexe} Paare \(w, \conj{w}\).
-      In der komplexen Linearfaktor-Zerlegung von \(p(z)\) k\"onnen dan wei 
-      Faktoren \((z-z_0)\) und \((z-\conj{z_0})\) jeweils zu einem 
-      quadratischen Faktor \[
-        z^2 - 2 \Re(z_0) z + \len{z}^2
-      \] mit \emph{reellen} Koeffizienten zusammengefasst werden.
-
-    \item Ein Polynom mit reellen Koeffizienten von \emph{ungeraden} Grad hat
-      mindestens eine \emph{reelle} Nullstelle.
-
-    \item Alle Nullstellen des Polynoms \(p(z) = a_n z^n + \cdot + a_1 z + a_0\)
-      liegen in der Gauss'schen Zahlenebene in einer Kreisscheibe um der 
-      Ursprung mit Radius \[
-        R = \sum_{k=0}^n \left\lvert\frac{a_k}{a_n}\right\rvert
-      \]
-
-    %% TODO: kubische Gleichung
-
-    \item F\"ur allgemeine Gleichungen vom Grad 5 und gr\"osser existieren 
-      prinzipiell \emph{keine} nur aus den 4 Grundoperationen und Wurzeln
-      zusammengesetzten L\"osungsformeln.
-  \end{itemize}
-\end{theorem}
-
-\section{Komplexwertige Funktionen}
-\section{Fourierreihen}
-\section{Spektren}
-\section{Diskrete Fouriertransformation}
-
-\section{Lizenz}
+\section{License}
 \doclicenseThis
 
 \end{document}
-% vim: set et ts=2 sw=2 spelllang=de spell linebreak :
+% vim: set et ts=2 sw=2 spelllang=us spell linebreak :
