@@ -3,7 +3,7 @@
 % !TeX root = komfour_zf.tex
 
 %% TODO: publish to CTAN
-\documentclass[twocolumn, margin=normal]{tex/hsrzf}
+\documentclass[twocolumn, margin=small]{tex/hsrzf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
@@ -56,6 +56,9 @@
 \newcommand\Qset{\mathbb{Q}}
 \newcommand\Rset{\mathbb{R}}
 \newcommand\Cset{\mathbb{C}}
+
+%% Missing operators
+\DeclareMathOperator\sgn{sgn}
 
 %% Complex operators
 \DeclareMathOperator\cjs{cjs}
@@ -141,7 +144,7 @@
 \end{lemma}
 
 \begin{definition}[Real and imaginary part and conjugation]
-  Let \(z = a + jb\). The \emph{real} part of \(z\) is \(\Re(z) = a\), similarly the \emph{imaginary} part is \(\Im(z) = b\). We can thus define the \emph{complex conjugate} \(\conj{z}\).
+  Let \(z = a + jb\). The \emph{real} part of \(z\) is \(\Re(z) = a\), similarly the \emph{imaginary} part is \(\Im(z) = b\). We can thus define the \emph{complex conjugate} \(\conj{z}\) of \(z\) to be
   \[
     z = \Re(z) + j\Im(z)
     \quad
@@ -154,14 +157,14 @@
 \end{definition}
 
 \begin{lemma}[Properties of absolute value]
-  Let \(z,w\in\Cset\). We have \(\len{z} \in\Rset^+_0\), \(z\conj{z} = \len{z}^2\) and as a consequence \(\len{zw} = \len{z}\cdot\len{w}\) and \(\len{\conj{z}} = \len{z}\). In addition we have the inequalities
+  Let \(z,w\in\Cset\). We have \(z\conj{z} = \len{z}^2\) and as a consequence \(\len{zw} = \len{z}\cdot\len{w}\) and \(\len{\conj{z}} = \len{z}\). In addition we have the inequalities
   \begin{align*}
     -\len{z} \leq &\Re(z) \leq \len{z} &
     \len{z} &\leq \len{\Re(z)} + \len{\Im(z)} \\
     -\len{z} \leq &\Im(z) \leq \len{z} &
     \len{z + w} &\leq \len{z} + \len{w}
   \end{align*}
-  The last one is the \emph{triangle inequality}.
+  The last one is the \emph{triangle inequality}. Notice that \(\len{z} \in\Rset^+_0\).
 \end{lemma}
 
 \begin{definition}[Reciprocal and quotients]
@@ -169,7 +172,7 @@
   It is now possible to define \(z/w = zw^{-1}\) with \(z,w \in\Cset\) and \(w \neq 0\).
 \end{definition}
 
-\begin{lemma}[More properties of conjugation]
+\begin{lemma}[Properties of conjugation]
   Let \(z,w \in\Cset\).
   \(\conj{z} = z\) iff \(z \in \Rset\) and \(\conj{z} = \conj{w}\) iff \(z = w\).
   Furthermore:
@@ -183,14 +186,14 @@
   \end{align*}
 \end{lemma}
 
-\begin{definition}[Polar notation]
-  An alternative representation of a complex number \(z = a + jb\) is its \emph{polar form} \(z = r \angle \phi\), where \(r = \len{z}\) and \(\phi = \arg{z} = r(\cos\phi + j\sin\phi)\).
+\begin{definition}[Argument and polar notation]
+  An alternative representation of a complex number \(z = a + jb\) is its \emph{polar form} \(z = r \angle \phi\), where \(r = \len{z}\) and \(\phi = \arg{z}\).
   \begin{align*}
     a &= r\cos\phi &
     b &= r \sin\phi &
     r &= \sqrt{z\conj{z}}
   \end{align*}
-  For \(a = 0\) we define \(\phi = \lim_{a\to 0} \arctan(b/a)\) and otherwise
+  For \(a = 0\) we define \(\phi = \lim_{a\to 0} \arctan(b/a) = \pm\pi/2\) and otherwise
   \begin{align*}
     \phi = \arg(z)
     &= \begin{cases}
@@ -293,7 +296,7 @@
 \end{theorem}
 
 \begin{lemma}
-  From the previous theorem follows that a polynomial of \emph{odd} degree, has always at least one real solution because \(r \in\Rset \iff r = \conj{r}\).
+  From the previous theorem follows that a polynomial with real coefficients of \emph{odd} degree, has \emph{always} at least one real solution because \(r \in\Rset \iff r = \conj{r}\).
 \end{lemma}
 
 \begin{theorem}
@@ -318,7 +321,8 @@
   \]
 \end{theorem}
 
-\begin{lemma} Let \(a,b \in\Cset\) and \(k\in\Zset\)
+\begin{lemma}[Rules for exponents]
+  Let \(a,b \in\Cset\) and \(k\in\Zset\), we can show that
   \[
     e^a e^b = e^{a+b} \quad
     e^a / e^b = e^{a-b} \quad
@@ -327,7 +331,39 @@
 \end{lemma}
 
 \begin{definition}[Trigonometric functions]
+  When \(z\) is a complex number we define
+  \begin{align*}
+    \cos z &= \frac{e^{jz} + e^{-jz}}{2} &
+    \sin z &= \frac{e^{jz} - e^{-jz}}{2j}
+  \end{align*}
+  like the (real) hyperbolic trigonometric functions
+  \begin{align*}
+    \cosh z &= \left( e^z + e^{-z} \right)/2 &
+    \sinh z &= \left( e^z - e^{-z} \right)/2
+  \end{align*}
+  Notice that the sinus function is point symmetric to \(\pi/2\), because \(\sin(\pi/2 - z) = \sin(\pi/2 + z)\).
 \end{definition}
+
+\begin{lemma}[Some trigonometric identities] Let \(x,a,b \in\Rset\) and \(\alpha,\beta \in\Cset\)
+  \begin{align*}
+    \sinh(jx) &= j\sin(x) \qquad \cosh(jx) = \cos(x) \\
+    \sin(a + jb) &= \sin(a)\cosh(b) + j\cos(a)\sinh(b) \\
+    \cos(a + jb) &= \cos(a)\cosh(b) + j\sin(a)\sinh(b) \\
+    2\sin(\alpha)\sin(\beta) &= \cos(\alpha - \beta) - \cos(\alpha + \beta) \\
+    2\sin(\alpha)\cos(\beta) &= \sin(\alpha - \beta) + \sin(\alpha + \beta)
+  \end{align*}
+\end{lemma}
+
+\begin{lemma}[Superposition of sinuses]
+  Let \(s(t) = A\sin(\omega t + \varphi)\) be a sinusoidal wave.
+  We can rewrite \(s\) in complex form with
+  \[
+    s(t) = \Im\left(Ae^{j(\omega t + \varphi)}\right) = \Im
+      Ae^{j\varphi}\cdot e^{j\omega t}
+  \]
+  If we now wish to sum \(N\) sinusoids with the same frequency \(\omega\), we can set
+  % TODO: Satz 18
+\end{lemma}
 
 \begin{definition}[Logarithm]
   Because \(w = e^z\) defined from \(\Cset \to \Cset\) is not a bijection (\(e^{z + 2\pi j} = e^z\)), unless we restrict the imaginary part of the domain to \((\pi, \pi]\), we get only an equivalence relationship because
@@ -351,15 +387,160 @@
     &= \exp\big(\ln\len{z}\cdot k/m)\exp((\arg z + 2\pi n)jk/m\big) \\
     &= \len{z}^{k/m}\exp\big((\arg z + 2\pi n)jk/m\big)= \sqrt[m]{z^k}
   \end{align*}
-  like in the reals, except that we have \(m\) values instead of 1 or 2. If we let \(w \in\Cset\) the expression \(z^w\) cannot be equal to an unique value because
+  like in the reals, except that we have \(m\) values because of the \(m\)-th root. If we let \(w \in\Cset\) the expression \(z^w\) cannot be equal to an unique value because
   \begin{align*}
     z^w = e^{w \ln z} &= \exp\big( w (\ln\len{z} + j \arg{z} + 2\pi nj)\big) \\
     &= e^{w(\ln\len{z} + j\arg z)} e^{w2\pi nj}
   \end{align*}
-  instead it is said to be \emph{multivalued}.
+  instead it is said to be \emph{multivalued}. This means that there are no general exponentiation rules.
 \end{lemma}
 
 \section{Fourier Series}
+\begin{definition}[Real trigonometric polynomial]
+  Let \(\omega = 2\pi/T \in\Rset\) and \(A_n, B_n\) be sequences in \(\Rset\).
+  We define a \emph{real trigonometric polynomial} of degree \(N\) to be
+  \[
+    \tau_N(t) = \frac{A_0}{2} + \sum_{n=1}^N A_n \cos(n\omega t) + B_n \sin(n\omega t)
+  \]
+\end{definition}
+
+\begin{lemma}[Orthogonality of the basis functions]
+  Let \(m,n \in\Nset_0\)
+  \begin{align*}
+    \int\limits_0^T \cos(m\omega t)\cos(n\omega t)
+    &= \begin{cases}
+        T & m = n = 0 \\
+        T/2 & m = n > 0 \\
+        0 & m \neq n
+      \end{cases} \\
+    \int\limits_0^T \sin(m\omega t)\sin(n\omega t)
+    &= \begin{cases}
+        T/2 & m = n \wedge n \neq 0 \\
+        0 & m \neq n \\
+        0 & m = 0 \vee n = 0
+      \end{cases} \\
+    \int\limits_0^T \cos(m\omega t)\sin(n\omega t) &= 0
+  \end{align*}
+\end{lemma}
+
+\begin{definition}
+  We denote with \(\Omega\) the space of real valued, \(T\)-periodic, piecewise continuous functions, that have only a finite number of discontinuities, in which both the right and left limit exist, within the interval \([0,T)\).
+\end{definition}
+
+\begin{theorem}[Fourier coefficients]
+  For any \(f\in\Omega\) we can now define the \emph{Fourier coefficients}
+  \begin{align*}
+    a_n &= \frac{2}{T}\int\limits_0^T f(t)\cos(n\omega t)\di{t} & a_0 &= \frac{2}{T}\int\limits_0^T f(t)\di{t} \\
+    b_n &= \frac{2}{T}\int\limits_0^T f(t)\sin(n\omega t)\di{t} & b_0 &= 0
+  \end{align*}
+  Worth noting are the special cases when \(n=0\).
+\end{theorem}
+
+\begin{definition}[Fourier Polynomial]
+  We can now use the Fourier coefficients as sequences for a trigonometric polynomial to obtain a \emph{Fourier Polynomial}
+  \[
+    S_N(t) = \frac{a_0}{2} + \sum_{n=1}^N a_n\cos(n\omega t) + b_n\sin(n\omega t)
+  \]
+\end{definition}
+
+\begin{lemma}
+  A trigonometric polynomial has the smallest distance (by the \(L^2\) metric) from a function \(f\in\Omega\), iff \(A_n = a_n\) and \(B_n = b_n\), in other words iff it is a Fourier Polynomial.
+\end{lemma}
+
+\begin{definition}[Fourier Series]
+  We can finally define the \emph{Fourier Series} to be the infinite Fourier Polynomial, by letting \(N\to\infty\)
+  \[
+    S(t) = \frac{a_0}{2} + \sum_{n=1}^N a_n\cos(n\omega t) + b_n\sin(n\omega t)
+  \]
+\end{definition}
+
+\begin{theorem}[Fourier coefficients of even and odd functions]
+  Recall that a function is said to be \emph{even} if \(f(-x) = f(x)\) or \emph{odd} if \(f(-x) = -f(x)\). We can show that if a function is
+  \begin{itemize}
+    \item odd, then \(b_n = 0\) for all \(n\), and
+      \[
+        a_n = \frac{4}{T}\int\limits_0^{T/2} f(t)\cos(n\omega t)\di{t}
+      \]
+    \item even, then \(a_n = 0\) for all \(n\), and
+      \[
+        b_n = \frac{4}{T}\int\limits_0^{T/2} f(t)\sin(n\omega t)\di{t}
+      \]
+  \end{itemize}
+\end{theorem}
+
+\begin{lemma}[Linearity of Fourier coefficients]
+  Recall that linearity means \(L(\mu x + \lambda y) = \(\mu L(x) + \lambda L(y)\). We then let \(f,g \in\Omega\) be functions with Fourier series and \(h = \mu f + \lambda g\) where \(\mu,\lambda\in\Rset\) are constants.
+  By denoting with \(a_n^{(f)}\) the Fourier coefficient \(a_n\) of the function \(f\), and similarly with \(b_n^{(f)}\), it is easily shown that
+  \begin{align*}
+    a_n^{(h)} &= \mu a_n^{(f)} + \lambda a_n^{(g)} &
+    b_n^{(h)} &= \mu b_n^{(f)} + \lambda b_n^{(g)}
+  \end{align*}
+\end{lemma}
+
+\begin{lemma}[Fourier coefficients after time dilation]
+  Let \(f\in\Omega\) be a function with a Fourier Series and \(g(t) = f(rt)\) with \(0 \neq r \in\Rset\). It follows that
+  \(a_n^{(g)} = a_n^{(f)}\) and \(b_n^{(g)} = \sgn(r) \cdot b_n^{(f)}\).
+\end{lemma}
+
+\begin{lemma}[Fourier coefficients after time translation]
+  Let \(f\in\Omega\) be a function with a Fourier Series and \(g(t) = f(t + \tau)\) with \(\tau\in\Rset\). It follows that
+  \begin{align*}
+    a_n^{(g)} &= \cos(n\omega \tau)\cdot a_n^{(f)} + \sin(n\omega \tau)\cdot b_n^{(f)} & n &\geq 0\\
+    b_n^{(g)} &= -\sin(n\omega \tau)\cdot a_n^{(f)} + \cos(n\omega \tau)\cdot b_n^{(f)} & n &> 0
+  \end{align*}
+\end{lemma}
+
+\begin{theorem}[Fourier theorem]
+  For any \(f\in\Omega\) the Fourier series of \(f\) converges in \(L^2\) metric to \(f\).
+  \[
+    \lim_{N\to\infty} \left\lVert 
+      \frac{a_0}{2} + \sum_{n=0}^N a_n \cos(n\omega t) + b_n \sin(n\omega t) - f(t) 
+    \right\rVert = 0
+  \]
+\end{theorem}
+
+\begin{theorem}[Plancherel Parselval theorem]
+  Let \(f\in\Omega\) with a Fourier Series with coefficients \(a_n\) and \(b_n\).
+  \[
+    \frac{a_0}{2} + \sum_{n=1}^\infty \left(a_n^2 + b_n^2\right)
+      \leqq \frac{2}{T} \int\limits_0^T \lvert f(t)\rvert^2 \di{t} = \left\lVert f \right\rVert^2
+  \]
+\end{theorem}
+
+\begin{theorem} Both sequences \(a_n, b_n\) for the Fourier coefficients of a function \(f\in\Omega\) converge to zero.
+  \begin{align*}
+    \lim_{n\to\infty} a_n 
+      &= \lim_{n\to\infty} \frac{2}{T}
+          \int\limits_0^T f(t) \cos(n\omega t) \di{t} = 0 \\
+    \lim_{n\to\infty} b_n 
+      &= \lim_{n\to\infty} \frac{2}{T}
+          \int\limits_0^T f(t) \sin(n\omega t) \di{t} = 0
+  \end{align*}
+\end{theorem}
+
+\begin{theorem}[Rate of convergence of Fourier coefficients]
+  If \(f\) is a \(T\)-periodic, \((m-2)\) times differentiable, continuous function. And if its \((m-1)\)-th derivative is pieceweise monotonous and \(\in \Omega\), then there exists a constant \(c \in\Rset\) such that
+  \[
+    \len{a_n} \leq \frac{c}{n^m} \qquad \len{b_n} \leq \frac{c}{n^m} \qquad m,n\in\Nset
+  \]
+\end{theorem}
+
+\begin{theorem}[Integration and differentiation of the Fourier series]
+  It is possible to show from the previous theorem (and others before) that when \(m\geq 2\) the Fouriers converges \emph{uniformly}. This means that it is possible to integrate or differentiate the series term by term.
+  \[
+    f'(t) = \sum_{n=1}^\infty b_n n\omega\cos(n\omega t) - a_n n\omega\sin(n\omega t)
+  \]
+  and
+  \begin{align*}
+    \int\limits_0^t f(\tau) \di{\tau} &=
+      \left(\sum_{n=1}^\infty \frac{b_n}{n\omega} \right)
+      + \frac{a_0}{2} t \\
+      &+ \left(\sum_{n=1}^\infty
+          \frac{a_n}{n\omega}\sin(n\omega t)
+          - \frac{b_n}{n\omega}\cos(n\omega t)
+        \right)
+  \end{align*}
+\end{theorem}
 
 \section{Fourier Transform}
 
