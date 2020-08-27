@@ -346,6 +346,7 @@
 
 \begin{lemma}[Some trigonometric identities] Let \(x,a,b \in\Rset\) and \(\alpha,\beta \in\Cset\)
   \begin{align*}
+    \sin(x + \pi/2) &= \cos(x) \qquad \cos(x - \pi/2) = \sin(x) \\
     \sinh(jx) &= j\sin(x) \qquad \cosh(jx) = \cos(x) \\
     \sin(a + jb) &= \sin(a)\cosh(b) + j\cos(a)\sinh(b) \\
     \cos(a + jb) &= \cos(a)\cosh(b) + j\sin(a)\sinh(b) \\
@@ -361,8 +362,12 @@
     s(t) = \Im\left(Ae^{j(\omega t + \varphi)}\right) = \Im
       Ae^{j\varphi}\cdot e^{j\omega t}
   \]
-  If we now wish to sum \(N\) sinusoids with the same frequency \(\omega\), we can set
-  % TODO: Satz 18
+  If we now wish to sum \(N\) sinusoids with the same frequency \(\omega\), the resulting sinusoid \(A\sin(\omega t + \varphi)\) has
+  \[
+    A = \left\lvert \sum_{n=1}^N A_n e^{j\varphi_n} \right\lvert
+    \quad
+    \varphi = \arg\sum_{n=1}^N A_n e^{j\varphi_n}
+  \]
 \end{lemma}
 
 \begin{definition}[Logarithm]
@@ -450,7 +455,7 @@
 \begin{definition}[Fourier Series]
   We can finally define the \emph{Fourier Series} to be the infinite Fourier Polynomial, by letting \(N\to\infty\)
   \[
-    S(t) = \frac{a_0}{2} + \sum_{n=1}^N a_n\cos(n\omega t) + b_n\sin(n\omega t)
+    S(t) = \frac{a_0}{2} + \sum_{n=1}^\infty a_n\cos(n\omega t) + b_n\sin(n\omega t)
   \]
 \end{definition}
 
@@ -542,7 +547,39 @@
   \end{align*}
 \end{theorem}
 
-\section{Fourier Transform}
+\begin{theorem}[Dirichlet pointwise convergence]
+  Let \(f\in\Omega\), then it is known that its Fourier series converges to
+  \[
+    \lim_{\epsilon\to 0}\frac{f(t-\epsilon) + f(t+\epsilon)}{2}
+  \]
+  for every \(t\), where the left and right derivative \(f'(t-\epsilon)\), \(f'(t+\epsilon)\), with \(\epsilon\to 0\), exist.
+
+  In the special case where \(f\) is continuous at \(t\), and the derivatives exist, there the Fourier series converges exactly to \(f(t)\), i.e. the value of the function at \(t\).
+\end{theorem}
+
+\begin{definition}[Complex representation of the Fourier coefficients]
+  By letting \(n\in\Zset\) and
+  \[
+    c_n = \conj{c_{-n}} = \frac{a_n - jb_n}{2} = \frac{1}{T}\int\limits_0^T f(t) e^{-jn\omega t} \di{t}
+  \]
+  using a notational trick for negative indices. We can compactly write a Fourier series or polynomial as
+  \[
+    S(t) = \sum_{n=-\infty}^\infty c_n e^{jn\omega t}
+  \]
+\end{definition}
+
+\begin{theorem}[Complex Fourier coefficients of even and odd functions]
+  By the definition of \(c_n\) and the previous similar theorem for the real coefficients, it is clear that when a function \(f\in\Omega\) is \emph{even}, then \(\Im(c_k) = 0\), whereas when \(f\) is \emph{odd} \(\Re(c_k) = 0\) (\(k\in\Zset\)).
+\end{theorem}
+
+\begin{theorem}[Complex Fourier coeffients after time translation]
+  Similarly to the previous theorem, we can now compactly write that if \(f\in\Omega\) has a Fourier series with coefficients \(c_k^{(f)}\), and \(g(t) = f(t + \tau)\), then
+  \[
+    c_k^{(g)} = e^{jk\omega \tau} c_k^{(f)} \qquad k \in \Zset
+  \]
+\end{theorem}
+
+%% TODO: fourier transform
 
 \section{License}
 \doclicenseThis
